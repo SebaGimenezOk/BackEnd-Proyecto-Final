@@ -1,5 +1,5 @@
 {
-  "name": "server-11-chat-1",
+  "name": "backend_proyecto_final",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -9,13 +9,15 @@
     "start:dev": "nodemon app.js"
   },
   "keywords": [],
-  "author": "",
+  "author": "SebaGimenezok",
   "license": "ISC",
   "dependencies": {
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
+    "lodash": "^4.17.21",
     "morgan": "^1.10.0",
-    "socket.io": "^4.5.3"
+    "socket.io": "^4.5.3",
+    "uuid": "^9.0.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.20"

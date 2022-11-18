@@ -1,40 +1,34 @@
 const express = require('express');
-require('dotenv').config();
-
-
-const logger = require('morgan');
-
 const { Server: HttpServer } = require('http');
 const { Server: IoServer } = require('socket.io')
+const indexRouter = require('./src/routes/index');
+const errorHandler=require('./src/middlewares/errorHandler');
+require('dotenv').config();
 
 const app = express();
 
 const http = new HttpServer(app);
-
 const io = new IoServer(http);
 
-app.use(express.static('public'));
+app.use(express.json());
+app.use(express.urlencoded({extended: true}))
 
-app.use(logger('dev'))
+app.use(express.static(__dirname + '/public'));
 
-app.get('/health', (_req, res) => {
-    res.status(200).json({
-        success: true,
-        environment: process.env.ENVIRONMENT || 'undefined',
-        health: 'Up!'
-
-    })
-})
+app.use('/api', indexRouter);
 
 app.get('/', (_req, res) => {
-    res.sendFile('index.html', { root: __dirname });
+    res.sendFile('index', { root: __dirname });
 })
+app.use(errorHandler);
+
 
 const PORT = process.env.PORT || 3000;
-
 http.listen(PORT, () => console.info(`Server up and running on port ${PORT}`));
 
-io.on('connection', socket => {
-    console.log(socket);
-    console.log('nuevo cliente socket conectado')
-})
+// io.on('connection', socket => {
+//     console.log(socket);
+//     console.log('nuevo cliente socket conectado')
+// })
+
+module.exports = http;
