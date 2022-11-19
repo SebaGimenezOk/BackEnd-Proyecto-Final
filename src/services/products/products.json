@@ -1,18 +1,42 @@
 [
   {
-    "name": "plancha",
-    "price": "2500",
-    "uuid": "bd907ac3-1fb0-40b2-8f78-b0c0893fdb59"
+    "nombre": "P1",
+    "precio": 1200,
+    "imgURL": "puntocom",
+    "descripcion": "descripcion larga del producto ",
+    "codigo": "zxasqw11",
+    "stock": 20,
+    "id": "jdksflfsjskdlñskfldkskfls",
+    "timestamp": "132840298340892"
   },
   {
-    "uuid": "5f14b422-2035-4d06-9826-ec515fc70e14"
+    "nombre": "P2",
+    "precio": 1900,
+    "imgURL": "puntocom",
+    "descripcion": "descripcion larga del producto ",
+    "codigo": "zxasqw12",
+    "stock": 10,
+    "id": "rutreierutieiurieuoi",
+    "timestamp": "3824782477292"
   },
   {
-    "name": "plancha",
-    "price": "2500",
-    "uuid": "cbdf5d75-3194-40bb-a16c-e36a5c6c44e2"
+    "nombre": "P3",
+    "precio": 1300,
+    "imgURL": "puntocom",
+    "descripcion": "descripcion larga del producto ",
+    "codigo": "zxasqw13",
+    "stock": 30,
+    "id": "jxvnxbnvsdjksjfsllks",
+    "timestamp": "3473847"
   },
   {
-    "uuid": "c09d9c8a-f05b-461f-af2d-308460188d20"
+    "nombre": "P4",
+    "precio": 5000,
+    "imgURL": "puntocom",
+    "descripcion": "descripcion larga del prod",
+    "codigo": "3324386786",
+    "stock": "12",
+    "uuid": "c1fd8650-3361-4cdc-b6f6-35b6ef627b9c",
+    "timestamp": "8438353985434"
   }
 ]

@@ -1,13 +1,14 @@
 const { json } = require('express');
 const fs = require('fs');
 
-class ProductService {
+class ProductoNacional {
     constructor() { }
 
     async createProduct(data) {
         try {
             const products = await fs.promises.readFile(__dirname + '/products.json');
             const productsObject = JSON.parse(products);
+            data.timestamp = Date.now() / 1000;
             productsObject.push(data);
             await fs.promises.writeFile(__dirname + '/products.json', JSON.stringify(productsObject, null, 2));
             return {
@@ -46,7 +47,7 @@ class ProductService {
         try {
             const products = await fs.promises.readFile(__dirname + '/products.json');
             const productsObject = JSON.parse(products);
-            const product = productsObject.filter(i => i.uuid == uuid);
+            const product = productsObject.filter(i => i.id == uuid);
             return {
                 success: true,
                 data: product[0]
@@ -66,11 +67,17 @@ class ProductService {
         try {
             const products = await this.getProducts();
             const newList = await products.data.map(i => {
-                if (i.uuid == uuid) {
+                if (i.id == uuid) {
                     return {
-                        name: data.name,
-                        price: data.price,
-                        uuid
+                        nombre: data.nombre,
+                        precio: data.precio,
+                        imgURL: data.imgURL,
+                        descripcion: data.descripcion,
+                        codigo: data.codigo,
+                        stock: data.stock,
+                        id: data.id,
+                        timestamp: data.timestamp
+
                     }
                 }
                 return i;
@@ -114,4 +121,4 @@ class ProductService {
 
 }
 
-module.exports = ProductService;
+module.exports = ProductoNacional;
