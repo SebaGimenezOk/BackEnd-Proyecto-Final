@@ -1,10 +1,15 @@
-const express = require('express');
-const { v4: uuidv4 } = require('uuid');
-const _ = require('lodash')
-const CarritoNacional = require('../../services/carrito/carrito.service');
+import express from "express";
+import { v4 as uuidv4 } from 'uuid';
+import _ from "lodash"
+
+
+import CarritoNacional from '../../services/carrito/carrito.service.js'
+
 
 const router = express.Router();
 const carritoNac = new CarritoNacional();
+
+
 
 router.post('/', async (req, res, next) => {
     try {
@@ -91,5 +96,4 @@ router.delete('/:id/productos/:prod_id', async (req, res, next) => {
 })
 
 
-
-module.exports = router;
+export default router;

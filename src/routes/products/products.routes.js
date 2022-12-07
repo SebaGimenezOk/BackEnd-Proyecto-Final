@@ -1,7 +1,9 @@
-const express = require('express');
-const { v4: uuidv4 } = require('uuid');
-const _ = require('lodash')
-const ProductoNacional = require('../../services/products/products.service');
+import express from "express";
+import { v4 as uuidv4 } from 'uuid';
+import _ from "lodash";
+
+
+import ProductoNacional from '../../services/products/products.service.js';
 
 const router = express.Router();
 const productNatio = new ProductoNacional();
@@ -72,4 +74,4 @@ router.delete('/:productUuid', async (req, res, next) => {
 
 
 
-module.exports = router;
+export default router;

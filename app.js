@@ -1,9 +1,20 @@
-const express = require('express');
-const { Server: HttpServer } = require('http');
-const { Server: IoServer } = require('socket.io')
-const indexRouter = require('./src/routes/index');
-const errorHandler=require('./src/middlewares/errorHandler');
-require('dotenv').config();
+import express from "express";
+import { v4 as uuidv4 } from 'uuid';
+import _ from "lodash"
+
+
+import { Server as HttpServer } from 'http';
+import { Server as IoServer } from 'socket.io';
+
+import indexRouter from './src/routes/index.js';
+import errorHandler from './src/middlewares/errorHandler.js';
+
+import dotenv, { config } from 'dotenv';
+import { getDirName } from "./utils.js";
+dotenv.config(); 
+
+
+
 
 const app = express();
 
@@ -13,12 +24,12 @@ const io = new IoServer(http);
 app.use(express.json());
 app.use(express.urlencoded({extended: true}))
 
-app.use(express.static(__dirname + '/public'));
+app.use(express.static(getDirName() + '/public'));
 
 app.use('/api', indexRouter);
 
 app.get('/', (_req, res) => {
-    res.sendFile('index', { root: __dirname });
+    res.sendFile('index', { root: getDirName()});
 })
 app.use(errorHandler);
 
@@ -31,4 +42,4 @@ http.listen(PORT, () => console.info(`Server up and running on port ${PORT}`));
 //     console.log('nuevo cliente socket conectado')
 // })
 
-module.exports = http;
+export default http;

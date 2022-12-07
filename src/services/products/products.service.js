@@ -1,21 +1,21 @@
-const { json } = require('express');
-const fs = require('fs');
+
+import fs from 'fs';
+import { getDirName } from '../../../utils.js';
 
 class ProductoNacional {
     constructor() { }
 
     async createProduct(data) {
         try {
-            const products = await fs.promises.readFile(__dirname + '/products.json');
+            const products = await fs.promises.readFile(getDirName()+ '/products.json');
             const productsObject = JSON.parse(products);
             data.timestamp = Date.now() / 1000;
             productsObject.push(data);
-            await fs.promises.writeFile(__dirname + '/products.json', JSON.stringify(productsObject, null, 2));
+            await fs.promises.writeFile(getDirName()+ '/products.json', JSON.stringify(productsObject, null, 2));
             return {
                 success: true,
                 data
             }
-
         } catch (err) {
             console.error(err);
             return {
@@ -28,7 +28,7 @@ class ProductoNacional {
 
     async getProducts() {
         try {
-            const data = await fs.promises.readFile(__dirname + '/products.json');
+            const data = await fs.promises.readFile(getDirName() + '/products.json');
             return {
                 success: true,
                 data: JSON.parse(data)
@@ -45,7 +45,7 @@ class ProductoNacional {
 
     async getProduct(uuid) {
         try {
-            const products = await fs.promises.readFile(__dirname + '/products.json');
+            const products = await fs.promises.readFile(getDirName() + '/products.json');
             const productsObject = JSON.parse(products);
             const product = productsObject.filter(i => i.id == uuid);
             return {
@@ -59,7 +59,6 @@ class ProductoNacional {
                 message: err.message
             }
         }
-
     }
 
 
@@ -82,7 +81,7 @@ class ProductoNacional {
                 }
                 return i;
             });
-            await fs.promises.writeFile(__dirname + '/products.json', JSON.stringify(newList, null, 2));
+            await fs.promises.writeFile(getDirName() + '/products.json', JSON.stringify(newList, null, 2));
             return {
                 success: true,
                 data: `Product ${uuid} modificado exitosamente`
@@ -101,10 +100,10 @@ class ProductoNacional {
 
     async deleteProduct(uuid) {
         try {
-            const products = await fs.promises.readFile(__dirname + '/products.json');
+            const products = await fs.promises.readFile(getDirName() + '/products.json');
             const productsObject = JSON.parse(products);
             const newProducts = productsObject.filter(i => i.uuid != uuid);
-            await fs.promises.writeFile(__dirname + '/products.json', JSON.stringify(newProducts, null, 2));
+            await fs.promises.writeFile(getDirName()+ '/products.json', JSON.stringify(newProducts, null, 2));
             return {
                 success: true,
                 data: `Product ${uuid} borrado  exitosamente`
@@ -121,4 +120,4 @@ class ProductoNacional {
 
 }
 
-module.exports = ProductoNacional;
+export default ProductoNacional;

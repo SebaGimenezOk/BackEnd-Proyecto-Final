@@ -1,17 +1,18 @@
-const { json } = require('express');
-const fs = require('fs');
+
+import fs from 'fs';
+import { getDirName } from '../../../utils.js';
 
 class CarritoNacional {
     constructor() { }
 
     async createCarrito(data) {
         try {
-            const carrito = await fs.promises.readFile(__dirname + '/carrito.json');
+            const carrito = await fs.promises.readFile(getDirName()+ '/carrito.json');
             const carritoParse = JSON.parse(carrito);
             data.timestamp = Date.now() / 1000;
             data.products = [];
             carritoParse.push(data);
-            await fs.promises.writeFile(__dirname + '/carrito.json', JSON.stringify(carritoParse, null, 2));
+            await fs.promises.writeFile(getDirName() + '/carrito.json', JSON.stringify(carritoParse, null, 2));
             return {
                 success: true,
                 data: data.id
@@ -29,7 +30,7 @@ class CarritoNacional {
 
     async getCarritos() {
         try {
-            const data = await fs.promises.readFile(__dirname + '/carrito.json');
+            const data = await fs.promises.readFile(getDirName() + '/carrito.json');
             return {
                 success: true,
                 data: JSON.parse(data)
@@ -46,7 +47,7 @@ class CarritoNacional {
 
     async getCarrito(uuid) {
         try {
-            const carritos = await fs.promises.readFile(__dirname + '/carrito.json');
+            const carritos = await fs.promises.readFile(getDirName() + '/carrito.json');
             const carritoParse = JSON.parse(carritos);
             const carrito = carritoParse.filter(i => i.id == uuid);
             return {
@@ -60,7 +61,6 @@ class CarritoNacional {
                 message: err.message
             }
         }
-
     }
 
 
@@ -78,7 +78,7 @@ class CarritoNacional {
                 }
                 return i;
             });
-            await fs.promises.writeFile(__dirname + '/carrito.json', JSON.stringify(newList, null, 2));
+            await fs.promises.writeFile(getDirName()+ '/carrito.json', JSON.stringify(newList, null, 2));
             return {
                 success: true,
                 data: `Carrito ${uuid} modificado exitosamente`
@@ -97,10 +97,10 @@ class CarritoNacional {
 
     async deleteCarrito(uuid) {
         try {
-            const carritos = await fs.promises.readFile(__dirname + '/carrito.json');
+            const carritos = await fs.promises.readFile(getDirName() + '/carrito.json');
             const carritoParse = JSON.parse(carritos);
             const newCarritos = carritoParse.filter(i => i.id != uuid);
-            await fs.promises.writeFile(__dirname + '/carrito.json', JSON.stringify(newCarritos, null, 2));
+            await fs.promises.writeFile(getDirName() + '/carrito.json', JSON.stringify(newCarritos, null, 2));
             return {
                 success: true,
                 data: `Carrito ${uuid} borrado  exitosamente`
@@ -117,4 +117,4 @@ class CarritoNacional {
 
 }
 
-module.exports = CarritoNacional;
+export default CarritoNacional;

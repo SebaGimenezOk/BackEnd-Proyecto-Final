@@ -5,4 +5,4 @@ const errorHandler = (err,_req,res,_next)=>{
         error:err.message
     })
 }
-module.exports=errorHandler;
+export default errorHandler;
