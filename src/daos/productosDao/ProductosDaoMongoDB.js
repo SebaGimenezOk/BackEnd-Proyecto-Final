@@ -1,11 +1,8 @@
-class ProductClass{
-    constructor(){}
-    getAllProducts(){
-        return[
-            {
-                productName:"PRODUCTS MONGO" 
-            }
-        ]
-    }
- };
+import ContenedorMongo from "../../contenedores/ContenedorMongoDB.js";
+
+class ProductClass extends ContenedorMongo{
+constructor(){
+    super('products')
+}
+}
  export default ProductClass;

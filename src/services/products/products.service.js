@@ -76,7 +76,6 @@ class ProductoNacional {
                         stock: data.stock,
                         id: data.id,
                         timestamp: data.timestamp
-
                     }
                 }
                 return i;
@@ -94,9 +93,6 @@ class ProductoNacional {
             }
         }
     }
-
-
-
 
     async deleteProduct(uuid) {
         try {
@@ -116,8 +112,6 @@ class ProductoNacional {
             }
         }
     }
-
-
 }
 
 export default ProductoNacional;

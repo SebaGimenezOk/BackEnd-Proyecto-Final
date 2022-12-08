@@ -8,30 +8,29 @@ import productService from './src/daos/index.js';
 productService();
 
 
-import {productsModel }from './src/models/product.model.js';
+// import {productsModel }from './src/models/product.model.js';
 
+// const CRUD = async () => {
+//     try {
+//         const URL = "mongodb://localhost:27017/ecommerce";
+//         await mongoose.connect(URL, {
+//             useNewUrlParser: true,
+//             useUnifiedTopology: true
+//         });
+//         console.info('Mongoose connected');
 
-const CRUD = async () => {
-    try {
-        const URL = "mongodb://localhost:27017/ecommerce";
-        await mongoose.connect(URL, {
-            useNewUrlParser: true,
-            useUnifiedTopology: true
-        });
-        console.info('Mongoose connected');
+//         const productMock = {
+//             name: "sombrero",
+//             percio: 450000,
+//             stock: 933
 
-        const productMock = {
-            name: "sombrero",
-            percio: 450000,
-            stock: 933
-
-        }
-        const newProduct = new productsModel(productMock);
-        const product= await newProduct.save();
-        console.log(product);
-    } catch (error) {
-        throw new Error(err);
-    }
-}
-CRUD();
+//         }
+//         const newProduct = new productsModel(productMock);
+//         const product= await newProduct.save();
+//         console.log(product);
+//     } catch (error) {
+//         throw new Error(err);
+//     }
+// }
+// CRUD();
 

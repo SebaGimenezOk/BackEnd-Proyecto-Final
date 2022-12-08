@@ -1,11 +1,7 @@
-class ProductClass{
-    constructor(){}
-    getAllProducts(){
-        return[
-            {
-                productName:"PRODUCTS FIREBASE" 
-            }
-        ]
+import ContenedorFirebase from "../../contenedores/ContenedorFirebase.js";
+class ProductClass extends ContenedorFirebase {
+    constructor() {
+        super('products')
     }
- };
- export default ProductClass;
+};
+export default ProductClass;
