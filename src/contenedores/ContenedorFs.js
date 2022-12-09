@@ -6,7 +6,7 @@ class ContenedorFs {
     constructor(data) {
         this.data = data;
     }
-    async createProduct(data) {
+    async save(data) {
         try {
             const products = await fs.promises.readFile(getDirName() + '/products.json');
             const productsObject = JSON.parse(products);
@@ -25,7 +25,7 @@ class ContenedorFs {
             }
         }
     }
-    async getProducts() {
+    async getAll() {
         try {
             const data = await fs.promises.readFile(getDirName() + '/products.json');
             return {
@@ -40,7 +40,7 @@ class ContenedorFs {
             }
         }
     }
-    async getProduct(uuid) {
+    async getById(uuid) {
         try {
             const products = await fs.promises.readFile(getDirName() + '/products.json');
             const productsObject = JSON.parse(products);
@@ -59,9 +59,9 @@ class ContenedorFs {
     }
 
 
-    async updateProduct(uuid, data) {
+    async upDate(uuid, data) {
         try {
-            const products = await this.getProducts();
+            const products = await this.getAll();
             const newList = await products.data.map(i => {
                 if (i.id == uuid) {
                     return {
@@ -91,7 +91,7 @@ class ContenedorFs {
         }
     }
 
-    async deleteProduct(uuid) {
+    async delete(uuid) {
         try {
             const products = await fs.promises.readFile(getDirName() + '/products.json');
             const productsObject = JSON.parse(products);
